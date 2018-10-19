@@ -1,12 +1,42 @@
 <body>
 <head>
+  <link rel="stylesheet" type="text/css" href="soundCSS.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="soundscript.js"></script>
 </head>
-  <div 
-  style = "background: black; height: 500px;"
+  <div
   tabindex = "1"
   onkeydown="setNote(event.key)"
-  >  
+  >
+  <div id="wrapper">
+	<ul id="piano">
+    <li><div class="space"></div></li>
+
+		<li><div id="lowF" class="whiteKey"></div></li>
+		<li><div id="lowG" class="whiteKey"></div><span id="lowFsharp" class="blackKey"></span></li>
+		<li><div id="lowA" class="whiteKey"></div><span id="lowGsharp" class="blackKey"></span></li>
+		<li><div id="lowB" class="whiteKey"></div><span id="lowAsharp" class="blackKey"></span></li>
+		<li><div id="middleC" class="whiteKey"></div></li>
+
+		<li><div id="midD" class="whiteKey"></div><span id="middleCsharp" class="blackKey"></span></li>
+
+		<li><div id="midE" class="whiteKey"></div><span id="midDsharp" class="blackKey"></span></li>
+		<li><div id="midF" class="whiteKey"></div></li>
+		<li><div id="midG" class="whiteKey"></div><span id="midFsharp" class="blackKey"></span></li>
+		<li><div id="midA" class="whiteKey"></div><span id="midGsharp" class="blackKey"></span></li>
+		<li><div id="midB" class="whiteKey"></div><span id="midAsharp" class="blackKey"></span></li>
+		<li><div id="highC" class="whiteKey"></div></li>
+		<li><div id="highD" class="whiteKey"></div><span id="highCsharp" class="blackKey"></span></li>
+		<li><div id="highE" class="whiteKey"></div><span id="highDsharp" class="blackKey"></span></li>
+		<li><div id="highF" class="whiteKey"></div></li>
+		<li><div id="highG" class="whiteKey"></div><span id="highFsharp" class="blackKey"></span></li>
+		<li><div id="highA" class="whiteKey"></div><span id="highGsharp" class="blackKey"></span></li>
+		<li><div id="highB" class="whiteKey"></div><span "highAsharp" class="blackKey"></span></li>
+	</ul>
+</div>
+
+
   </div>
 </body>
+
 
