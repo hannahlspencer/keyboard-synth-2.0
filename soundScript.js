@@ -1,33 +1,76 @@
-var audio_context = window.AudioContext || window.webkitAudioContext;  
-  
-  var context = new audio_context();
-  var oscillator;
-  var soundOn = false;
-  var filter = context.createBiquadFilter();
-  var num = 0;
-  
- 
-  function setNote(key) {
-	  
+var audio_context = window.AudioContext || window.webkitAudioContext;
+
+var context = new audio_context();
+var oscillator;
+var soundOn = false;
+var filter = context.createBiquadFilter();
+var num = 0;
+
+ var keyboard = {
+     lowF:174.61,
+     lowFsharp:185.00,
+     lowG:196.00,
+     lowGsharp:207.65,
+     lowA:220.00,
+     lowAsharp:233.08,
+     lowB:246.94,
+
+     middleC:261.63,
+     middleCsharp:277.18,
+
+     midD:293.66,
+     midDsharp:311.12,
+     midE:329.63,
+
+     midF:349.23,
+     midFsharp:369.99,
+
+     midG:391.99,
+     midGsharp:415.30,
+
+     midA:440.00,
+     midAsharp:466.16,
+     midB:493.88,
+
+     highC:523.25,
+     highCsharp:554.36,
+
+     highD:587.33,
+     highDsharp:622.25,
+     highE:659.25,
+
+     highF:698.45,
+     highFsharp:739.98,
+
+     highG:783.99,
+     highGsharp:830.60,
+
+     highA:880.00,
+     highAsharp:932.32,
+     highB:987.76
+ };
+
+function setNote(key) {
+
 	//turn oscillator on and off
-	if(key == "Enter"){
+  if(key == "Enter"){
 	  if (soundOn == false) {
 	    oscillator = context.createOscillator();
-		oscillator.connect(filter);
-		filter.connect(context.destination);
-		oscillator.connect(context.destination);
-		oscillator.frequency.value = 600; 
-		soundOn = true;
-		oscillator.frequency.value = 600;  
-		filter.frequency.value = 100;
-	    oscillator.start();  
+		  oscillator.connect(filter);
+		  filter.connect(context.destination);
+		  oscillator.connect(context.destination);
+		  oscillator.frequency.value = 600;
+		  soundOn = true;
+		  oscillator.frequency.value = 600;
+		  filter.frequency.value = 100;
+	    oscillator.start();
 	  } else {
-		soundOn = false;
-		oscillator.stop();
+		  soundOn = false;
+		  oscillator.stop();
 	  }
-      
-    }
-	
+
+  }
+
 	if(key == "0") {
 	    if (num < 3) {
 		  num++;
@@ -37,141 +80,148 @@ var audio_context = window.AudioContext || window.webkitAudioContext;
 		var cycle = ["sawtooth", "sine", "square", "triangle"];
 		oscillator.type = cycle[num];
 	}
-		
+
+  $('.whiteKey_active').removeClass('whiteKey_active');
+  $('.blackKey_active').removeClass('blackKey_active');
     //first row of white notes
-	//plays f
-	if (key == "\\") {
-      oscillator.frequency.value = 174.61;
-    }
-	//plays g
-	if (key == "z") {
-      oscillator.frequency.value = 196.00;
-    }
-	//plays a
-	if (key == "x") {
-      oscillator.frequency.value = 220.00;
-    }
-	//plays b
-	if (key == "c") {
-      oscillator.frequency.value = 246.94;
-    }
-    //plays middle c
-    if (key == "v") {
-      oscillator.frequency.value = 261.63;
-    }
-    //plays d
-    if (key == "b") {
-      oscillator.frequency.value = 293.66;
-    }
-    //plays e
-    if (key == "n") {
-      oscillator.frequency.value = 329.63;
-    }
-    //plays f
-    if (key == "m") {
-      oscillator.frequency.value = 349.23;
-    }
-    //plays g
-    if (key == ",") {
-      oscillator.frequency.value = 391.99;
-    }
-    //plays a
-    if (key == ".") {
-      oscillator.frequency.value = 440.00;
-    }
-    //plays b
-    if (key == "/") {
-      oscillator.frequency.value = 493.88;
+    if (key == "`") {
+      oscillator.frequency.value = keyboard.lowF;
+      document.getElementById("lowF").classList.add("whiteKey_active");
     }
 
-    
+    if (key == "z") {
+      oscillator.frequency.value = keyboard.lowG;
+      document.getElementById("lowG").classList.add("whiteKey_active");
+    }
+
+    if (key == "x") {
+      oscillator.frequency.value = keyboard.lowA;
+      document.getElementById("lowA").classList.add("whiteKey_active");
+    }
+    if (key == "c") {
+      oscillator.frequency.value = keyboard.lowB;
+      document.getElementById("lowB").classList.add("whiteKey_active");
+    }
+    if (key == "v") {
+      oscillator.frequency.value = keyboard.middleC;
+      document.getElementById("middleC").classList.add("whiteKey_active");
+    }
+    if (key == "b") {
+      oscillator.frequency.value = keyboard.midD;
+      document.getElementById("midD").classList.add("whiteKey_active");
+    }
+    if (key == "n") {
+      oscillator.frequency.value = keyboard.midE;
+      document.getElementById("midE").classList.add("whiteKey_active");
+    }
+    if (key == "m") {
+      oscillator.frequency.value = keyboard.midF;
+      document.getElementById("midF").classList.add("whiteKey_active");
+    }
+    if (key == ",") {
+      oscillator.frequency.value = keyboard.midG;
+      document.getElementById("midG").classList.add("whiteKey_active");
+    }
+    if (key == ".") {
+      oscillator.frequency.value = keyboard.midA;
+      document.getElementById("midA").classList.add("whiteKey_active");
+    }
+    if (key == "/") {
+      oscillator.frequency.value = keyboard.midB;
+      document.getElementById("midB").classList.add("whiteKey_active");
+    }
+
     //first row of black notes
-	//plays f#
     if (key == "a") {
-      oscillator.frequency.value = 185.00;
+      oscillator.frequency.value = keyboard.lowFsharp;
+      document.getElementById("lowFsharp").classList.add("blackKey_active");
     }
-	//plays g#
     if (key == "s") {
-      oscillator.frequency.value = 207.65;
+      oscillator.frequency.value = keyboard.lowGsharp;
+      document.getElementById("lowGsharp").classList.add("blackKey_active");
     }
-	//plays a#
     if (key == "d") {
-      oscillator.frequency.value = 233.08;
+      oscillator.frequency.value = keyboard.lowAsharp;
+      document.getElementById("lowAsharp").classList.add("blackKey_active");
     }
-    //plays c#
     if (key == "g") {
-      oscillator.frequency.value = 277.18;
+      oscillator.frequency.value = keyboard.middleCsharp;
+      document.getElementById("middleCsharp").classList.add("blackKey_active");
     }
-    //plays d#/;;
     if (key == "h") {
-      oscillator.frequency.value = 311.12;
+      oscillator.frequency.value = keyboard.midDsharp;
+      document.getElementById("midDsharp").classList.add("blackKey_active");
     }
-    //plays f#
     if (key == "k") {
-      oscillator.frequency.value = 369.99;
+      oscillator.frequency.value = keyboard.midFsharp;
+      document.getElementById("midFsharp").classList.add("blackKey_active");
     }
-    //plays g#
     if (key == "l") {
-      oscillator.frequency.value = 415.30;
+      oscillator.frequency.value = keyboard.midGsharp;
+      document.getElementById("midGsharp").classList.add("blackKey_active");
     }
-    //plays a#
     if (key == ";") {
-      oscillator.frequency.value = 466.16;
+      oscillator.frequency.value = keyboard.midAsharp;
+      document.getElementById("midAsharp").classList.add("blackKey_active");
     }
-    
+
     //second row of white notes
-    //plays c
     if (key == "q") {
-      oscillator.frequency.value = 523.25;
+      oscillator.frequency.value = keyboard.highC;
+      document.getElementById("highC").classList.add("whiteKey_active");
     }
-    //plays d
     if (key == "w") {
-      oscillator.frequency.value = 587.33;
+      oscillator.frequency.value = keyboard.highD;
+      document.getElementById("highD").classList.add("whiteKey_active");
     }
-    //plays e
     if (key == "e") {
-      oscillator.frequency.value = 659.25;
+      oscillator.frequency.value = keyboard.highE;
+      document.getElementById("highE").classList.add("whiteKey_active");
     }
-    //plays f
     if (key == "r") {
-      oscillator.frequency.value = 698.45;
+      oscillator.frequency.value = keyboard.highF;
+      document.getElementById("highF").classList.add("whiteKey_active");
     }
-    //plays g
     if (key == "t") {
-      oscillator.frequency.value = 783.99;
+      oscillator.frequency.value = keyboard.highG;
+      document.getElementById("highG").classList.add("whiteKey_active");
     }
-    //plays a
     if (key == "y") {
-      oscillator.frequency.value = 880.00;
+      oscillator.frequency.value = keyboard.highA;
+      document.getElementById("highA").classList.add("whiteKey_active");
     }
-    //plays b
     if (key == "u") {
-      oscillator.frequency.value = 987.76;
+      oscillator.frequency.value = keyboard.highB;
+      document.getElementById("highB").classList.add("whiteKey_active");
     }
-	//plays C6
-	if(key == "i") {
-		oscillator.frequency.value = 1046.50;
-	}
-    
+	  //plays C6 (not currently used)
+	  if(key == "i") {
+		  oscillator.frequency.value = 1046.50;
+	  }
+
     //second row of black notes
-    //plays c#
     if (key == "2") {
-      oscillator.frequency.value = 554.36;
+      oscillator.frequency.value = keyboard.highCsharp;
+      pressNote("highCsharp", "blackKey_active");
     }
-    //plays d#
     if (key == "3") {
-      oscillator.frequency.value = 622.25;
+      oscillator.frequency.value = keyboard.highDsharp;
+      pressNote("highDsharp", "blackKey_active");
     }
-    //plays f#
     if (key == "4") {
-      oscillator.frequency.value = 739.98;
+      oscillator.frequency.value = keyboard.highFsharp;
+      pressNote("highFsharp", "blackKey_active");
     }
-    //plays g#
     if (key == "5") {
-      oscillator.frequency.value = 830.60;
+      oscillator.frequency.value = keyboard.highGsharp;
+      pressNote("highGsharp", "blackKey_active");
     }
-    //plays a#
     if (key == "6") {
-      oscillator.frequency.value = 932.32;
+      oscillator.frequency.value = keyboard.highAsharp;
+      pressNote("highAsharp", "blackKey_active");
     }
-  }
+}
+
+function pressNote(note, keyClass) {
+  document.getElementById(note).classList.add(keyClass);
+}
